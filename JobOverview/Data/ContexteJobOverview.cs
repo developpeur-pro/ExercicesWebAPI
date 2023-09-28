@@ -81,6 +81,11 @@ namespace JobOverview.Data
 				entity.HasOne<Version>().WithMany()
 						.HasForeignKey(d => new { d.NumeroVersion, d.CodeLogiciel });
 			});
+
+			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+			{
+				JeuDonnées.Créer(modelBuilder);
+			}
 		}
 	}
 }

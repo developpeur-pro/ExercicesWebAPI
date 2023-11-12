@@ -19,3 +19,10 @@ Création d'un contrôleur pour exploiter ces tables.
 
 ### v67 Requêtes POST
 Création d'actions pour l'ajout de releases au format FormData et d'équipes et personnes au format JSON
+
+### v75 Gestion des erreurs et journalisation
+Gestion des erreurs liées aux contraintes d'intégrité pour renvoyer des réponses 400.   
+Journalisation détaillée de ces erreurs avec la méthode d'extension du contrôleur vue dans le cours.
+
+### v77 Validation
+Ajout de règles de validation implémentées manuellement sur les versions et releases.

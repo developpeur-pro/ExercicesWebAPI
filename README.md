@@ -26,3 +26,17 @@ Journalisation détaillée de ces erreurs avec la méthode d'extension du contrôleu
 
 ### v77 Validation
 Ajout de règles de validation implémentées manuellement sur les versions et releases.
+
+### v81 Complétion du modèle
+Ajout des tables Activites, ActivitesMetiers, Taches et Travaux.  
+Insertion d'un jeu de données.
+
+### v82 Création du contrôleur Taches
+Création du contrôleur avec actions de lecture et d'ajout pour les tâches et travaux.
+
+### v83 Ajout de règles métier
+Ajout de règles métier pour la création de tâches et travaux.
+
+### v94 Requêtes DELETE, PUT et PATCH
+Ajout d'actions DELETE et PUT pour la suppression et la modification de tâches, travaux et personnes.  
+Ajout d'une action PATCH pour la modification de versions.

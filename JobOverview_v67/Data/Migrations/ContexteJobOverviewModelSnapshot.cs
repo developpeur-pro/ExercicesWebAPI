@@ -314,13 +314,17 @@ namespace JobOverview_v67.Data.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<decimal>("TauxProductivite")
-                        .HasColumnType("decimal(3,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(3,2)")
+                        .HasDefaultValue(1m);
 
                     b.HasKey("Pseudo");
 
                     b.HasIndex("CodeEquipe");
 
                     b.HasIndex("CodeMetier");
+
+                    b.HasIndex("Manager");
 
                     b.ToTable("Personnes");
                 });
@@ -340,6 +344,9 @@ namespace JobOverview_v67.Data.Migrations
 
                     b.Property<DateTime>("DatePubli")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Numero", "NumeroVersion", "CodeLogiciel");
 
@@ -386,6 +393,9 @@ namespace JobOverview_v67.Data.Migrations
 
                     b.Property<short>("Millesime")
                         .HasColumnType("smallint");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Numero", "CodeLogiciel");
 
@@ -447,11 +457,13 @@ namespace JobOverview_v67.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("JobOverview_v67.Entities.Service", null)
+                    b.HasOne("JobOverview_v67.Entities.Service", "Service")
                         .WithMany()
                         .HasForeignKey("CodeService")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("JobOverview_v67.Entities.Logiciel", b =>
@@ -465,13 +477,11 @@ namespace JobOverview_v67.Data.Migrations
 
             modelBuilder.Entity("JobOverview_v67.Entities.Metier", b =>
                 {
-                    b.HasOne("JobOverview_v67.Entities.Service", "Service")
+                    b.HasOne("JobOverview_v67.Entities.Service", null)
                         .WithMany()
                         .HasForeignKey("CodeService")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("JobOverview_v67.Entities.Module", b =>
@@ -501,6 +511,11 @@ namespace JobOverview_v67.Data.Migrations
                         .HasForeignKey("CodeMetier")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("JobOverview_v67.Entities.Personne", null)
+                        .WithMany()
+                        .HasForeignKey("Manager")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Métier");
                 });

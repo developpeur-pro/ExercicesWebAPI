@@ -53,7 +53,7 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasIndex("CodeService");
 
-                    b.ToTable("Equipes");
+                    b.ToTable("Equipes", (string)null);
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Filiere", b =>
@@ -70,7 +70,7 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasKey("Code");
 
-                    b.ToTable("Filieres");
+                    b.ToTable("Filieres", (string)null);
 
                     b.HasData(
                         new
@@ -113,7 +113,7 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasIndex("CodeFiliere");
 
-                    b.ToTable("Logiciels");
+                    b.ToTable("Logiciels", (string)null);
 
                     b.HasData(
                         new
@@ -190,7 +190,7 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasIndex("CodeModuleParent", "CodeLogicielParent");
 
-                    b.ToTable("Modules");
+                    b.ToTable("Modules", (string)null);
 
                     b.HasData(
                         new
@@ -314,7 +314,9 @@ namespace JobOverview_v77.Data.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<decimal>("TauxProductivite")
-                        .HasColumnType("decimal(3,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(3,2)")
+                        .HasDefaultValue(1m);
 
                     b.HasKey("Pseudo");
 
@@ -322,7 +324,9 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasIndex("CodeMetier");
 
-                    b.ToTable("Personnes");
+                    b.HasIndex("Manager");
+
+                    b.ToTable("Personnes", (string)null);
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Release", b =>
@@ -341,11 +345,14 @@ namespace JobOverview_v77.Data.Migrations
                     b.Property<DateTime>("DatePubli")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Numero", "NumeroVersion", "CodeLogiciel");
 
                     b.HasIndex("NumeroVersion", "CodeLogiciel");
 
-                    b.ToTable("Releases");
+                    b.ToTable("Releases", (string)null);
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Service", b =>
@@ -362,7 +369,7 @@ namespace JobOverview_v77.Data.Migrations
 
                     b.HasKey("Code");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Version", b =>
@@ -387,11 +394,14 @@ namespace JobOverview_v77.Data.Migrations
                     b.Property<short>("Millesime")
                         .HasColumnType("smallint");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Numero", "CodeLogiciel");
 
                     b.HasIndex("CodeLogiciel");
 
-                    b.ToTable("Versions");
+                    b.ToTable("Versions", (string)null);
 
                     b.HasData(
                         new
@@ -447,11 +457,13 @@ namespace JobOverview_v77.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("JobOverview_v77.Entities.Service", null)
+                    b.HasOne("JobOverview_v77.Entities.Service", "Service")
                         .WithMany()
                         .HasForeignKey("CodeService")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Logiciel", b =>
@@ -465,13 +477,11 @@ namespace JobOverview_v77.Data.Migrations
 
             modelBuilder.Entity("JobOverview_v77.Entities.Metier", b =>
                 {
-                    b.HasOne("JobOverview_v77.Entities.Service", "Service")
+                    b.HasOne("JobOverview_v77.Entities.Service", null)
                         .WithMany()
                         .HasForeignKey("CodeService")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("JobOverview_v77.Entities.Module", b =>
@@ -501,6 +511,11 @@ namespace JobOverview_v77.Data.Migrations
                         .HasForeignKey("CodeMetier")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("JobOverview_v77.Entities.Personne", null)
+                        .WithMany()
+                        .HasForeignKey("Manager")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Métier");
                 });

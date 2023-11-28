@@ -88,10 +88,6 @@ namespace JobOverview_v77.Data
 						.HasForeignKey(d => new { d.NumeroVersion, d.CodeLogiciel });
 			});
 
-			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-			{
-				JeuDonnées.Créer(modelBuilder);
-			}
 			#endregion
 
 			#region Equipes
@@ -160,6 +156,11 @@ namespace JobOverview_v77.Data
 					.OnDelete(DeleteBehavior.NoAction);
 			});
 			#endregion
+
+			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+			{
+				JeuDonnées.Créer(modelBuilder);
+			}		
 		}
 	}
 }

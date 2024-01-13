@@ -40,3 +40,7 @@ Ajout de règles métier pour la création de tâches et travaux.
 ### v94 Requêtes DELETE, PUT et PATCH
 Ajout d'actions DELETE et PUT pour la suppression et la modification de tâches, travaux et personnes.  
 Ajout d'une action PATCH pour la modification de versions.
+
+### v100 Authentification
+Création d'un serveur d'identité avec Duende IdentityServer  
+Sécurisation de l'API et création d'une appli cliente de test Blazor WASM avec Backend For Frontend

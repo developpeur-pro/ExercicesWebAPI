@@ -1,0 +1,42 @@
+@inject HttpClient Http
+
+<AuthorizeView>
+    <Authorized>
+        <dl>
+            @foreach (var claim in @context.User.Claims)
+            {
+                <dt>@claim.Type</dt>
+                <dd>@claim.Value</dd>
+            }
+        </dl>
+
+		<div style="display:grid; grid-template-columns:800px; grid-gap:1rem;">
+			<h5>Jeton d'accès encodé</h5>
+			<textarea rows="4">@jetonEncodé</textarea>
+
+			<h5>Jeton d'accès décodé</h5>
+			<textarea rows="22">@jetonDécodé</textarea>
+		</div>
+    </Authorized>
+    <NotAuthorized>
+        <h3>No session</h3>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+	private string? jetonEncodé;
+	private string? jetonDécodé;
+
+	[CascadingParameter]
+	private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		var user = (await authenticationStateTask).User;
+		if (user.Identity?.IsAuthenticated ?? false)
+		{
+			jetonEncodé = await Http.GetStringAsync("Infos/EncodedToken");
+			jetonDécodé = await Http.GetStringAsync("Infos/DecodedToken");
+		}
+	}
+}

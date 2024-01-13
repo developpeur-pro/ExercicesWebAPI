@@ -1,0 +1,39 @@
+﻿@page "/fetchdata"
+@using System.Text.Json;
+@inject HttpClient Http
+
+@attribute [Authorize]
+
+<PageTitle>Test API</PageTitle>
+
+<h1>Test de l'API JobOverview</h1>
+
+<p>Requête GET sur le point de terminaison <code>https://localhost:7108/api/Taches?logiciel=ANATOMIA&version=6</code></p>
+
+@if (reponse == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<h5>Résultat :</h5>
+	<pre>@reponse</pre>
+}
+
+@code {
+	private string? reponse;
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			reponse = await Http.GetStringAsync("/Taches?logiciel=ANATOMIA&version=6");
+			reponse = JsonSerializer.Serialize(JsonDocument.Parse(reponse),
+							new JsonSerializerOptions { WriteIndented = true });
+		}
+		catch (HttpRequestException e)
+		{
+			reponse = e.Message;
+		}
+	}
+}

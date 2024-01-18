@@ -41,6 +41,7 @@ builder.Services.AddAuthentication(options =>
        options.Scope.Clear();
        options.Scope.Add("openid");
        options.Scope.Add("profile");
+       options.Scope.Add("entreprise");
        options.Scope.Add("offline_access"); // pour utiliser le jeton d'actualisation
 
        // Active la récupération des revendications sur le point de terminaison

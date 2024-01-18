@@ -44,3 +44,7 @@ Ajout d'une action PATCH pour la modification de versions.
 ### v100 Authentification
 Création d'un serveur d'identité avec Duende IdentityServer  
 Sécurisation de l'API et création d'une appli cliente de test Blazor WASM avec Backend For Frontend
+
+### v114 Autorisation
+Ajout d'utilisateurs et de revendications sur le serveur d'identité.  
+Configuration de l'autorisation sur l'API pour la gestion des tâches et des équipes.

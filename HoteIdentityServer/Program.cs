@@ -25,8 +25,13 @@ builder.Services.AddIdentityServer(options =>
          new IdentityResources.Profile(),
     })
 
-    // Configure une appli cliente
-    .AddInMemoryClients(new Client[] {
+	 // Etendue d'API "entreprise" et revendications
+	 .AddInMemoryApiScopes(new ApiScope[] {
+			new ApiScope("entreprise", new[] { "métier", "manager" })
+	 })
+
+	 // Configure une appli cliente
+	 .AddInMemoryClients(new Client[] {
          new Client
          {
             ClientId = "BlazorJO",
@@ -41,7 +46,7 @@ builder.Services.AddIdentityServer(options =>
             FrontChannelLogoutUri = "https://localhost:7189/signout-oidc",
 
 				// Etendues d'API autorisées
-				AllowedScopes = { "openid", "profile" },
+				AllowedScopes = { "openid", "profile", "entreprise" },
 
             // Autorise le client à utiliser un jeton d'actualisation
 				AllowOfflineAccess = true,

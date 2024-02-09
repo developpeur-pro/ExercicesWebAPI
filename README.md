@@ -48,3 +48,7 @@ Sécurisation de l'API et création d'une appli cliente de test Blazor WASM avec B
 ### v114 Autorisation
 Ajout d'utilisateurs et de revendications sur le serveur d'identité.  
 Configuration de l'autorisation sur l'API pour la gestion des tâches et des équipes.
+
+### v123 Doc et tests
+Mise en œuvre du générateur de doc NSwag et ajout de descriptions sur les actions du contrôleur des tâches.  
+Ajout du projet de tests unitaires pour tester le service métier ServiceTaches.  

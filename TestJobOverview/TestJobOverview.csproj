@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JobOverview_123\JobOverview_v123.csproj" />
+    <ProjectReference Include="..\JobOverview_123\JobOverview_v128.csproj" />
   </ItemGroup>
 
 </Project>

@@ -51,4 +51,7 @@ Configuration de l'autorisation sur l'API pour la gestion des tâches et des équi
 
 ### v128 Doc et tests
 Mise en œuvre du générateur de doc NSwag et ajout de descriptions sur les actions du contrôleur des tâches.  
-Ajout du projet de tests unitaires pour tester le service métier ServiceTaches.  
+Ajout du projet de tests unitaires pour tester le service métier ServiceTaches.
+
+### v145 Versionnage
+Versionnage de l'API et de sa doc, dans une architecture à un seul projet, avec un modèle EF et une base communs aux 2 versions.

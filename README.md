@@ -55,3 +55,9 @@ Ajout du projet de tests unitaires pour tester le service métier ServiceTaches.
 
 ### v145 Versionnage
 Versionnage de l'API et de sa doc, dans une architecture à un seul projet, avec un modèle EF et une base communs aux 2 versions.
+
+### v154 Accès concurrentiels
+Mise en place d'un jeton d'accès concurrentiels sur l'entité `Tache`, et affectation de sa valeur par le code.
+
+### v158 Architecture à base de ServiceResult
+Mise en place d'une architecture à base de ServiceResult, et création du projet de tests unitaires correspondant.
